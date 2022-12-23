@@ -21,7 +21,7 @@ export default function SimpleAccordian() {
         <AccordionDetails>
          <RequestTabs/>
         </AccordionDetails>
-        <div style={{padding:'1%'}}>
+        <div >
         <Button  size="small" variant="contained">save</Button>
         </div>
         

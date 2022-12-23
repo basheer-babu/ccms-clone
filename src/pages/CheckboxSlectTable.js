@@ -27,6 +27,7 @@ import ccmsData from '../asserts/CCMS_DATA.json'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import FormDialog from './FormDialog';
 function createData(name, calories, fat, carbs, protein) {
   return {
     name,
@@ -351,7 +352,10 @@ export default function CheckboxSlectTable() {
          <Button size="small" variant="contained">Clear</Button>
          </Stack>
          <div style={{padding:"5px"}}>
+         <Stack spacing={2} direction="row">
           <Button  size="small" variant="contained" onClick={()=>{window.location.reload()}}>Refresh</Button>
+          <FormDialog/>
+          </Stack>
          </div>
       {/* <div>{JSON.stringify(selected)}</div> */}
       <Paper sx={{ width: '100%', mb: 2 }}>
