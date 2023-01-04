@@ -25,6 +25,7 @@ import { Button, Stack, TextField } from '@mui/material';
 import ccmsData from '../asserts/CCMS_DATA.json'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useNavigate } from "react-router-dom";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 function createData(name, calories, fat, carbs, protein) {
   return {
     name,
@@ -227,7 +228,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Search Tasks
+          Search Cases
         </Typography>
       )}
 
@@ -370,9 +371,9 @@ export default function NormalSearchTable() {
                         />
                       </TableCell> */}
                       <TableCell padding="checkbox">
-                        <PlayArrowRoundedIcon onClick={()=>window.open('/makerscreen','_blank')}
-                          color="error"
-                          fontSize='large'
+                        <RemoveRedEyeIcon 
+                          color="black"
+                          fontSize='small'
                           style={{cursor:'pointer'}}
                         />
                       </TableCell>

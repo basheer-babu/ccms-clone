@@ -45,17 +45,26 @@ export default function FormDialog() {
 
   const handleCreateTask = (event) => {
     setAlert(0);
+    // http://localhost:9191/addProduct
+    axios.post('http://localhost:8085/engine-rest/process-definition/key/Process_16aocrb/start', {
    
-    axios.post('http://localhost:9191/addProduct', {
-        "id": 0,
-        "case_ref_no": CaseRefNo,
-        "court_order_id": CourtCaseId,
-        "request_type": "",
-        "court_name": "",
-        "court_order_date": CaseCreationDate,
-        "maker_name": makerName,
-        "checker_name": checkerName,
-        "defendant_type": null
+        "variables": {
+          "CaseRefrenceNo": {
+              "value": CaseRefNo,
+              "type":"String"
+          },
+          "CourtId": {
+              "value": CourtCaseId,
+              "type":"String"
+          },
+        
+          "CourtOrderDate": {
+              "value": CaseCreationDate,
+              "type":"String"
+          }
+  
+      },
+   "businessKey" : "myBusinessKey2"
     })
     .then((resp) => {
       console.dir(resp);
@@ -79,17 +88,27 @@ export default function FormDialog() {
         clearTimeout(timeId)
       }
   };
+React.useEffect(() => {
+ 
+setCaseRefNo("CCMS-"+genRand());
+ 
+}, [])
+
+
+function genRand() {
+  return Math.floor(Math.random()*89999999+10000000);
+}
 
 
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Create Task
+        Create Case
       </Button>
       <Dialog fullWidth="true" maxWidth="md" open={open} onClose={handleClose}>
-        {alert==1?  <Alert severity="success">Task Created Successfully!</Alert> :""}
+        {alert==1?  <Alert severity="success">Case Created Successfully!</Alert> :""}
         {alert==2? <Alert severity="error">Something went Wrng!</Alert>:""}
-        <DialogTitle>Creating A Task</DialogTitle>
+        <DialogTitle>Creating Case</DialogTitle>
 
        
         <DialogContent>
@@ -117,8 +136,8 @@ export default function FormDialog() {
               onChange={handleChange}
             >
               <MenuItem value={"Process_16aocrb"}>CCMS Process</MenuItem>
-              <MenuItem value={""}>Traveling Process</MenuItem>
-              <MenuItem value={""}>Thirty</MenuItem>
+              {/* <MenuItem value={""}>Traveling Process</MenuItem>
+              <MenuItem value={""}>Thirty</MenuItem> */}
             </Select>
           </FormControl>
             </Grid>
@@ -132,11 +151,11 @@ export default function FormDialog() {
                 <TextField  value={CourtCaseId} onChange={(e)=>setCourtCaseId(e.target.value)} size="small" id="outlined-basic" label="Court Case Id" variant="outlined" />
               </FormControl>
             </Grid>
-            <Grid item xs={2} sm={4} md={3}>
+            {/* <Grid item xs={2} sm={4} md={3}>
               <FormControl fullWidth>
                 <TextField  value={bpmRefNo} onChange={(e)=>setBpmRefNo(e.target.value)} size="small" id="outlined-basic" label="BPM Ref No" variant="outlined" />
               </FormControl>
-            </Grid>
+            </Grid> */}
             <Grid item xs={2} sm={4} md={3}>
               <FormControl fullWidth>
                 <TextField  value={CaseCreationDate} onChange={(e)=>setCaseCreationDate(e.target.value)} size="small" id="outlined-basic" label="Case Creation Date" variant="outlined" />
@@ -153,11 +172,11 @@ export default function FormDialog() {
                 <TextField value={makerName} onChange={(e)=>setMakerName(e.target.value)}  size="small" id="outlined-basic" label="Maker Name" variant="outlined" />
               </FormControl>
             </Grid>
-            <Grid item xs={2} sm={4} md={3}>
+            {/* <Grid item xs={2} sm={4} md={3}>
               <FormControl fullWidth>
                 <TextField value={checkerName} onChange={(e)=>setCheckerName(e.target.value)} size="small" id="outlined-basic" label="Checker Name" variant="outlined" />
               </FormControl>
-            </Grid>
+            </Grid> */}
             
             
              
@@ -166,7 +185,7 @@ export default function FormDialog() {
         </DialogContent>
        
         <DialogActions>
-                <Button   sx={{ textTransform: 'none', backgroundColor: '#FF5E00' }}  variant="contained" onClick={handleCreateTask}>Create</Button>
+                  <Button   sx={{ textTransform: 'none', backgroundColor: '#FF5E00' }}  variant="contained" onClick={handleCreateTask}>Create</Button>
                   <Button   sx={{ textTransform: 'none', color: "#FF5E00", borderColor: '#FF5E00' }}  variant="outlined" onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

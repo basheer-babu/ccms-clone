@@ -31,7 +31,7 @@ export default function RequestDetailsAccordians() {
           <Typography>Defendant Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-         Coming Soon...
+        
         </AccordionDetails>
       </Accordion>
       <Accordion >
@@ -43,7 +43,7 @@ export default function RequestDetailsAccordians() {
           <Typography>Compliant Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-         Coming Soon...
+       
         </AccordionDetails>
       </Accordion>
       <Accordion >
@@ -55,7 +55,7 @@ export default function RequestDetailsAccordians() {
           <Typography>Request Type Details</Typography>
         </AccordionSummary>
         <AccordionDetails>
-         Coming Soon...
+    
         </AccordionDetails>
       </Accordion>
     </div>

@@ -28,6 +28,7 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FormDialog from './FormDialog';
+import {reactLocalStorage} from 'reactjs-localstorage';
 function createData(name, calories, fat, carbs, protein) {
   return {
     name,
@@ -100,31 +101,31 @@ const headCells = [
     label: ' ',
   },
   {
-    id: 'case_ref_no',
+    id: 'caseRefrenceNo',
     numeric: false,
     disablePadding: false,
     label: 'Case Ref No',
   },
   {
-    id: 'court_order_id',
+    id: 'courtId',
     numeric: false,
     disablePadding: false,
     label: 'Court Order Id',
   },
   {
-    id: 'request_type',
+    id: 'requestType',
     numeric: false,
     disablePadding: false,
     label: 'Request Type',
   },
   {
-    id: 'court_name',
+    id: 'courtName',
     numeric: false,
     disablePadding: false,
     label: 'Court Name',
   },
   {
-    id: 'court_order_date',
+    id: 'courtOrderDate',
     numeric: false,
     disablePadding: false,
     label: 'Court Order Date',
@@ -146,6 +147,12 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Defendant Type',
+  },
+  {
+    id: 'level',
+    numeric: false,
+    disablePadding: false,
+    label: 'Activity Level',
   },
 ];
 
@@ -271,8 +278,9 @@ export default function CheckboxSlectTable() {
   const [data, setData] = React.useState([]);
 
   React.useEffect(()=>{
-
-    axios.get('http://localhost:9191/products', {})
+    // http://localhost:9191/products
+    let usern=reactLocalStorage.get("username")
+    axios.get('http://localhost:8085/ccms/getTasks?level='+usern, {})
       .then((resp) => {
         console.dir(resp);
         setData(resp.data);
@@ -408,7 +416,7 @@ export default function CheckboxSlectTable() {
                         />
                       </TableCell>
                       <TableCell padding="checkbox">
-                        <PlayArrowRoundedIcon onClick={()=>window.open('/makerscreen','_blank')}
+                        <PlayArrowRoundedIcon onClick={()=>window.open('/makerscreen/'+row.proInstanceId,'_blank')}
                           color="error"
                           fontSize='large'
                           style={{cursor:'pointer'}}
@@ -420,15 +428,16 @@ export default function CheckboxSlectTable() {
                         // scope="row"
                         // padding="none"
                       >
-                        {row.case_ref_no}
+                        {row.caseRefrenceNo}
                       </TableCell>
-                      <TableCell>{row.court_order_id}</TableCell>
-                      <TableCell>{row.request_type}</TableCell>
-                      <TableCell>{row.court_name}</TableCell>
-                      <TableCell>{row.court_order_date}</TableCell>
-                      <TableCell>{row.maker_name}</TableCell>
-                      <TableCell>{row.checker_name}</TableCell>
-                      <TableCell>{row.defendant_type}</TableCell>
+                      <TableCell>{row.courtId}</TableCell>
+                      <TableCell>{row.requestType}</TableCell>
+                      <TableCell>{row.courtName}</TableCell>
+                      <TableCell>{row.courtOrderDate}</TableCell>
+                      <TableCell>{row.makerName}</TableCell>
+                      <TableCell>{row.checkerName}</TableCell>
+                      <TableCell>{row.defendantType}</TableCell>
+                      <TableCell>{row.level}</TableCell>
                     </TableRow>
                   );
                 })}

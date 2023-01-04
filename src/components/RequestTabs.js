@@ -30,12 +30,12 @@ function RequestTabs() {
         )}
         {tabIndex === 1 && (
           <Box>
-            <Typography> Coming Soon...</Typography>
+            <Typography> .</Typography>
           </Box>
         )}
         {tabIndex === 2 && (
           <Box>
-            <Typography> Coming Soon...</Typography>
+            <Typography>.</Typography>
           </Box>
         )}
       </Box>
